@@ -19,11 +19,6 @@ body {
   display: block;
 }
 
-.search-wrapper {
-  display: flex;
-  justify-content: center;
-}
-
 .search {
   display: flex;
   justify-content: center;
@@ -33,6 +28,8 @@ body {
   background-color: lightgoldenrodyellow;
   width: 300px;
   border-radius: 5px;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 #main-section img {
@@ -45,4 +42,13 @@ body {
 .detail-box {
   /* display: none; */
   position: absolute;
+}
+
+.main-section {
+  width: 100%;
+  height: 100%;
+}
+
+.main-section img {
+  width: 100%;
 }

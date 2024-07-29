@@ -5,9 +5,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Map App</title>
     <link rel="stylesheet" href="style2.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.css"
+      referrerpolicy="no-referrer"
+    />
+    <!-- m3tjx61ua6-->
+    <script
+      type="text/javascript"
+      src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=m3tjx61ua6"
+    ></script>
   </head>
   <body>
-    <h2>deploy test</h2>
+    <div class="wrapper">
+      <div class="search">
+        <input type="text" placeholder="지역 또는 도서관명 검색..." />
+        <button><i class="ri-search-line"></i></button>
+      </div>
+      <div id="map">
+        <!-- <img src="map2.jpg" alt="" /> -->
+      </div>
+
+      <div class="detail_box">
+        <div class="guide">
+          <i class="ri-arrow-drop-up-line"></i>
+        </div>
+
+        <div class="detail_wrapper"></div>
+      </div>
+    </div>
+    <script src="data.js"></script>
     <script src="app.js"></script>
   </body>
 </html>
+
+<!-- <div class="text-left">
+           
+  <p class="time"></p>
+  <p class="tel"></p>
+  <pre class="addr"></pre>
+</div>
+<div class="text-right">
+  <div class="time_contents">
+    <div class="week_day"></div>
+    <div class="week_end"></div>
+    <div class="holi_day"></div>
+  </div>
+  <div class="tel_contents"></div>
+  <div class="addr_contents"></div>
+</div> -->
