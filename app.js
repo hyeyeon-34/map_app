@@ -27,14 +27,40 @@ const currentData = data.records.filter((item) => {
     item.위도 !== ''
   );
 });
-// console.log(currentData);
 
-// item.데이터기준일자
-// 2023년 10월 이후
+// <1번> 검색 버튼 기능
+const searchBtn = document.querySelector('.search button'); // 검색 버튼
+const searchInput = document.querySelector('.search input'); // 검색 입력창
+const mapElmt = document.querySelector('#map');
+const loading = document.querySelector('.loading ');
+
+// 검색 버튼 클릭 시 실행 함수
+searchBtn.addEventListener('click', function () {
+  const searchValue = searchInput.value; //입력값 저장
+  if (searchInput.value == '') {
+    alert('검색어를 입력해 주세요');
+    searchInput.focus(); // 커서 입력창에 포커스
+    return;
+  } // 검색어 없이 클릭할 경우 알림
+
+  const searchResult = currentData.filter(
+    (item) =>
+      item.도서관명.includes(searchValue) || item.시군구명.includes(searchValue)
+  );
+  if (searchResult.length === 0) {
+    alert('검색 결과가 없습니다.');
+    searchInput.value = '';
+    searchInput.focus();
+    return;
+  } else {
+    mapElmt.innerHTML = ''; // 네이버 맵 영역 초기화 위에선 하얗게
+    startLenderMap(searchResult[0].위도, searchResult[0].경도);
+  }
+});
+// </1번>
 // 네이버 앱 적용
 
 navigator.geolocation.getCurrentPosition((position) => {
-  // console.log(position);
   const lat = position.coords.latitude;
   const lng = position.coords.longitude;
 
@@ -75,8 +101,6 @@ function startLenderMap(lat, lng) {
         homePage: item.홈페이지주소,
       });
 
-      // console.log(marker.title);
-
       let infoWindow = new naver.maps.InfoWindow({
         content: `
          <h4 style="padding:0.25rem 0.5rem; font-size:12px; font-weight:600; color:#555">${item.도서관명}</h4>
@@ -86,6 +110,8 @@ function startLenderMap(lat, lng) {
          
          `,
       });
+
+      loading.style.display = 'none';
 
       naver.maps.Event.addListener(marker, 'click', function () {
         if (infoWindow.getMap()) {
@@ -121,9 +147,6 @@ function startLenderMap(lat, lng) {
     detailGuide.classList.add('active');
     guideIcon.setAttribute('class', 'ri-arrow-drop-down-line');
     infoWrapper.innerHTML = '';
-
-    //  const infoWrapper = document.querySelector('.detail_wrapper');
-    //  infoWrapper.innerHTML = '';
 
     const {
       title,
